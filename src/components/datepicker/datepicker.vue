@@ -24,9 +24,15 @@
         <ul class="day-con day-list">
           <li
             v-for="(day, index) of visibleDate"
-            :key="index" @click="checkDay(day,index)"
+            :key="index"
+            :class="{'disabled': !isDayDisabled(day)}"
+            @click="checkDay(day,index,isDayDisabled(day))"
           >
-            <span v-text="new Date(day).getDate()" :class="{'check':checkDayIndex === index}"></span>
+            <span
+              v-text="new Date(day).getDate()"
+              :class="[{'check':checkDayIndex === index},{'today': isToday(day)}]"
+            >
+            </span>
           </li>
         </ul>
       </div>
@@ -48,20 +54,31 @@ export default {
     // console.log(this.visibleDate)
   },
   methods: {
-    test(...a) {
+    test() {
       this.isVisible = !this.isVisible
     },
     // 获取当前点击的位置
     getCurrentPosition(x, y) {
-      let domWidth  = document.documentElement.innerWidth || window.innerWidth
       let domHeight  = document.documentElement.innerHeight || window.innerHeight
-      this.isTop = domHeight - y > y ? 'bootom' : 'top'
-      console.log(this.isTop)
+      this.isTop = domHeight - y > y ? 'bottom' : 'top'
     },
-    checkDay(day, index) {
+    checkDay(day, index, type) {
+      if (!type) return false
       let {year, month, today} = util.getYearMonthDay(day)
       this.checkDayIndex = index
       console.log(`你选择了：${year}-${String(month+1).padStart(2, '0')}-${String(today).padStart(2, '0')}`)
+    },
+    // 判断是否是当前月，不是当前月的添加disabled状态
+    isDayDisabled(date) {
+      let {year, month} = util.getYearMonthDay(this.defaultValue)
+      let {year:a, month:b} = util.getYearMonthDay(date)
+      return year === a && month === b
+    },
+    // 判断是否是今天
+    isToday(date) {
+      let {year, month, today} = util.getYearMonthDay(new Date())
+      let {year:y, month:m, today:d} = util.getYearMonthDay(date)
+      return year === y && month === m && today === d
     }
   },
   computed: {
@@ -72,7 +89,7 @@ export default {
     },
     visibleDate() {
       // 获取当前时间 年，月，日
-      let {year, month, today} = util.getYearMonthDay(this.defaultValue)
+      let {year, month} = util.getYearMonthDay(this.defaultValue)
       // 通过当前年，月获取当前月的第一天
       let currentMonthFirstDay = util.getDate(year, month, 1)
       // 获取当前月第一天是星期几
@@ -90,9 +107,7 @@ export default {
   props: {
     defaultValue: {
       type: Date,
-       default() {
-         return new Date
-       }
+       "default": () => new Date
     }
   },
   directives: {
