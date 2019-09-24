@@ -39,6 +39,9 @@ ul,li
         flex: 1
         margin: 0
         line-height: 20px
+        span
+          padding: 0 5px
+          font-size: 14px
     .body
       .week
         padding: 10px 0
@@ -54,10 +57,10 @@ ul,li
       .day-con
         li
           cursor: pointer
-          &:hover
-            color: $base-color
-          > .check,
+          &:hover,
           > .today
+            color: $base-color
+          > .check
             display: inline-block
             width: 24px
             height: 24px

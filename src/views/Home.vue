@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <date-picker></date-picker>
+    <date-picker v-model="nowDate"></date-picker>
     <div style="height: 1000px"></div>
   </div>
 </template>
@@ -14,6 +14,11 @@ import datePicker from '@/components/datepicker/datepicker'
 
 export default {
   name: 'home',
+  data() {
+    return {
+      nowDate: new Date()
+    }
+  },
   components: {
     HelloWorld,
     datePicker

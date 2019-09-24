@@ -6,7 +6,7 @@ const util =  {
         today = day.getDate()
     return {year, month, today}
   },
-  getDate(year, month, day) {
+  getDate(year, month=0, day=1) {
     return new Date(year, month, day)
   }
 }
