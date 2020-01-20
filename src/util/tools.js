@@ -9,21 +9,29 @@ const util =  {
   getDate(year, month=0, day=1) {
     return new Date(year, month, day)
   },
-  deepclone(obj) {
+  // 深度拷贝
+  deepClone(origin, hash=new WeakMap) {
     // debugger
-    if (obj == null) return obj
-    if (typeof obj != 'object') return obj
-    // 判断是否是日期对象
-    if (obj instanceof Date) return new Date(obj)
-    // 判断是否是正则对象
-    if (obj instanceof RegExp) return new RegExp(obj)
-    let res = new obj.constructor
-    for(let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        res[key] = this.deepclone(obj[key])
+    // 去除Null值
+    if(origin === null) return origin
+    // 把不是对象类型的数据直接返回
+    if(typeof origin !== 'object') return origin
+    // 判断时间对象
+    if(origin instanceof Date) return new Date(origin)
+    // 判断正则对象
+    if(origin instanceof RegExp) return new RegExp(origin)
+    if(hash.has(origin)) {
+      return hash.get(origin)
+    }
+    let instance = new origin.constructor
+    hash.set(origin, instance)
+    for(let key in origin) {
+      // 去除原型上的属性
+      if(origin.hasOwnProperty(key)) {
+        instance[key] = this.deepClone(origin[key], hash)
       }
     }
-    return res
+    return instance
   }
 }
 export default util

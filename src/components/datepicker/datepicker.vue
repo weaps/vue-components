@@ -66,7 +66,7 @@ export default {
       let domHeight  = document.documentElement.innerHeight || window.innerHeight
       this.isTop = domHeight - y > y ? 'bottom' : 'top'
     },
-    checkDay(day, index, type) {
+    checkDay(day, index) {
       // if (!type) return false
       let {year, month, today} = util.getYearMonthDay(day)
       this.checkDayIndex = index
