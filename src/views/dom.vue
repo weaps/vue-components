@@ -11,7 +11,6 @@ export default {
     }
   },
   mounted() {
-    // debugger
     let dom = document.querySelector('.dom')
     for(let i = 0; i < this.total; i++) {
       let li = document.createElement('li')
