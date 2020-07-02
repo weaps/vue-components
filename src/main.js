@@ -7,6 +7,9 @@ import util from './util/tools'
 import './assets/sass/datepicker.sass'
 import 'element-ui/lib/theme-chalk/index.css'
 import GeminiScrollbar from 'vue-gemini-scrollbar'
+import svgIcon from '@/components/svg/svg.vue'
+import './icons'
+Vue.component('svgs', svgIcon)
 Vue.config.productionTip = false
 Vue.use(elementUI)
 Vue.use(GeminiScrollbar)
