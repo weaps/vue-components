@@ -70,12 +70,6 @@ export default {
     console.log(obj)
     console.log(obj2)
   },
-  mounted() {
-    axios.get('/api/schools').then(res => {
-      debugger
-    })
-    this.clickGeneratePicture()
-  },
   methods: {
     rowClick(a, b, c) {
       console.log(a, b, c)

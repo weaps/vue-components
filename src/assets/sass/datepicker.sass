@@ -72,3 +72,176 @@ ul,li
           &.disabled
             color: #cccccc
             cursor: not-allowed
+
+.drag-container
+  .el-header
+    position: relative
+    background:rgba(255,255,255,1)
+    box-shadow:0px 2px 6px 0px rgba(0,0,0,0.1)
+    z-index: 10
+  .el-aside
+    position: relative
+    padding: 0 24px 80px 24px
+    height: calc(100vh - 48px)
+    border-right: 1px solid rgba(240,240,240,1)
+    .menu-group
+      margin-left: -4px
+      margin-right: -4px
+    .fixd-sub-menu
+      position: fixed
+      left: 0
+      bottom: 0
+      width: 292px
+      height: 60px
+      padding: 0 24px
+      text-align: left
+      border-top: 1px solid #F0F0F0
+      background: #ffffff
+      box-sizing: border-box
+      .el-checkbox
+        top: 50%
+        transform: translateY(-50%)
+  .el-main
+    padding: 0
+    background: rgba(245,245,245,1)
+  .el-collapse
+    border-top: 0
+    .el-collapse-item__content
+      padding-bottom: 12px
+      text-align: left
+      .item
+        display: inline-block
+        width: 50%
+        padding: 4px 6px
+      .el-button
+        width: 100%
+    .el-collapse-item__wrap,
+    .el-collapse-item__header
+      border-bottom: 1px dashed #d9d9d9
+    .el-collapse-item__header
+      &.is-active
+        border-bottom-color: transparent
+  .left-drag-module
+    position: relative
+    float: left
+    width: 352px
+    height: 100%
+    .area-disabled
+      position: absolute
+      top: 0
+      right: 0
+      content: ''
+      width: 100%
+      height: 100%
+      background: rgba(0,0,0, .5)
+      z-index: 10
+      .tips
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+        color: rgba(255, 255,255, .8)
+        font-size: 14px
+        font-weight: 100
+        i
+          font-size: 80px
+        h5
+          line-height: 30px 
+  .list-group
+    min-height: 100%
+  .el-card
+    position: relative
+    border-radius: 6px
+    border-color: transparent
+    margin-bottom: 12px
+    overflow: visible
+    &:last-child
+      margin-bottom: 0
+    &.sortable-ghost
+      border: 1px dashed red
+    .is-show
+      display: none
+    &:hover
+      .is-show
+        display: block
+  .container-scroll
+    height: calc( 100vh - 48px )
+    .drag-scroll-container
+      height: calc(100vh - 96px)
+      padding: 16px 16px 0 16px
+  .drag-nav
+    height: 48px
+    background: rgba(255, 255, 255, 1)
+  .right-drag-module
+    position: relative
+    float: left
+    width: calc( 100% - 352px )
+    height: 100%
+    padding: 0 0 0 12px
+    .list-group
+      min-height: calc( 100% - 76px )
+      &:empty
+        position: relative
+        border: 1px dashed #ddd
+        border-radius: 6px
+        background: url('../images/no-data.png') no-repeat 50% 40%
+        &::after
+          position: absolute
+          left: 50%
+          top: 50%
+          content: '当前模块暂无数据，请从左侧菜单拖拽。'
+          color: #bbb
+          transform: translate(-50%, -30%)
+  .draging
+    width: 100%
+  .el-tabs__header
+    background: #ffffff
+    border-radius: 6px
+    .el-tabs__nav-wrap
+      &::after
+        display: none
+      .el-tabs__nav-scroll
+        padding: 0 24px
+        .el-tabs__item
+          height: 48px
+          line-height: 48px
+    &:hover
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)
+  .el-tabs__content
+    padding-bottom: 10px
+    overflow: visible
+  .clearfix
+    &::after,
+    &::before
+      display: table
+      content: " "
+    &::after
+      clear: both
+  .tab-drga
+    position: relative
+    width: 100%
+    padding: 0 16px
+    text-align: left
+    font-size: 0
+    cursor: pointer
+    li
+      position: relative
+      display: inline-block
+      line-height: 46px
+      padding: 0 8px
+      font-size: 14px
+      & + li
+        margin-left: 12px
+      &:hover
+        color: #368FFF
+      &.active
+        color: #368FFF
+        &::after
+          position: absolute
+          left: 0
+          bottom: -1px
+          content: ''
+          width: 100%
+          height: 2px
+          background: #368FFF
+          z-index: 10
