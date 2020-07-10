@@ -369,6 +369,7 @@ export default {
     },
     sortDown(index) {
       console.log(index)
+      const [a, b] = this.tabList.split()
     },
     sortEdit(index) {
       console.log(index)

@@ -10,6 +10,7 @@
 	<div class="home">
 		<img alt="Vue logo" src="../assets/logo.png" />
 		<h1>{{$store.state.num}}</h1>
+		<svgs icon="qq" size="2rem" color="red" />
 		<el-button type="primary" @click="clickme">点我</el-button>
 		<custom-form
 			:model="formData"
