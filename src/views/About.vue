@@ -48,10 +48,8 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
-import jsonData from '@/util/tableData.json'
-import util from '@/util/tools'
-import html2canvas from 'html2canvas'
+import jsonData from '@/utils/tableData.json'
+import utils from '@/utils/tools'
 export default {
   name: 'test',
   data() {
@@ -65,7 +63,7 @@ export default {
     this.jsonData = jsonData.data
     let obj = { a: 1, b: 2 }
     obj.c = obj
-    let obj2 = util.deepClone(obj)
+    let obj2 = utils.deepClone(obj)
     // obj.a = 10
     console.log(obj)
     console.log(obj2)
