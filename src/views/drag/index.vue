@@ -1,6 +1,8 @@
 <template>
   <el-container class="drag-container">
-    <el-header height="47px">Header</el-header>
+    <el-header height="47px">
+      <TemplateHeader />
+    </el-header>
     <el-container>
       <el-aside width="292px">
         <el-collapse v-model="activeNames" @change="handleChange">
@@ -46,7 +48,26 @@
       <el-main>
         <GeminiScrollbar class="container-scroll">
           <!-- header -->
-          <div class="drag-nav">asfd</div>
+          <div class="drag-nav">
+            <el-row :gutter="20">
+              <el-col :span="8">asdfasd</el-col>
+              <el-col :span="16" class="text-right">
+                <el-dropdown class="custom-dropdown">
+                  <el-avatar size="small" icon="el-icon-user-solid"></el-avatar>
+                  <span class="el-dropdown-link">
+                    李晓年<i class="el-icon-arrow-down el-icon--right"></i>
+                  </span>
+                  <!-- <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
+                    <el-dropdown-item command="b">狮子头</el-dropdown-item>
+                    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+                    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+                    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+                  </el-dropdown-menu> -->
+                </el-dropdown>
+              </el-col>
+            </el-row>
+          </div>
           <div class="drag-scroll-container clearfix">
             <!-- <EditAndDel /> -->
 
@@ -188,24 +209,7 @@
     </el-container>
 
     <!-- tab dialog -->
-    <el-dialog title="收货地址" :visible.sync="isTabDialog" width="800px">
-      <el-table :data="tabList">
-        <el-table-column type="index" width="200"></el-table-column>
-        <el-table-column property="name" label="栏目"></el-table-column>
-        <el-table-column label="操作" width="200">
-          <template slot-scope="scope">
-            <el-button type="text" size="mini" @click="sortEdit(scope.$index)">编辑</el-button>
-            <el-button v-if="scope.$index !== 0" type="text" size="mini" @click="sortUp(scope.$index)">上移</el-button>
-            <el-button type="text" size="mini" @click="sortDown(scope.$index)">下移</el-button>
-            <el-button type="text" size="mini" @click="sortDel(scope.$index)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="isTabDialog = false">取 消</el-button>
-        <el-button type="primary" @click="isTabDialog = false">确 定</el-button>
-      </div>
-    </el-dialog>
+    <TabEditDialog v-if="isTabDialog" ref="tabEditDialog" :tabList="tabList" @saveTabData="saveTabData" />
 
   </el-container>
 </template>
@@ -223,9 +227,11 @@ import areaData from "./data";
 import draggable from "vuedraggable";
 import MenuItem from "./components/menu-item";
 import EditAndDel from "./components/edit-and-del";
+import TabEditDialog from './components/tab-edit-dialog'
+import TemplateHeader from './components/template-header'
 export default {
   name: "App",
-  components: { draggable, MenuItem, EditAndDel },
+  components: { draggable, MenuItem, EditAndDel, TabEditDialog, TemplateHeader },
   data: function() {
     return {
       activeNames: [0, 1],
@@ -275,8 +281,24 @@ export default {
           id: "tab3",
         },
         {
-          name: "研训",
+          name: "研训a",
           id: "tab4",
+        },
+        {
+          name: "备课b",
+          id: "tab5",
+        },
+        {
+          name: "课堂c",
+          id: "tab6",
+        },
+        {
+          name: "家校d",
+          id: "tab7",
+        },
+        {
+          name: "研训e",
+          id: "tab8",
         },
       ],
       activeName: "tab1",
@@ -359,22 +381,15 @@ export default {
     // },
     editClick() {
       this.isTabDialog = true
+      this.$nextTick(() => {
+        this.$refs.tabEditDialog.isShowDialog()
+      })
     },
-    formatter(row, column, cellValue, index) {
-      console.log(row, column, cellValue, index)
-    },
-    // tab 选项排序方法
-    sortUp(index) {
-      console.log(index)
-    },
-    sortDown(index) {
-      console.log(index)
-      const [a, b] = this.tabList.split()
-    },
-    sortEdit(index) {
-      console.log(index)
+    saveTabData(data) {
+      console.log(data)
+      this.tabList = data
     }
-  },
+  }
 };
 </script>
 
@@ -394,7 +409,7 @@ body {
   }
 }
 .sortable-ghost {
-  border: 1px dashed red;
+  border: 2px dashed #BBBFC4;
 }
 </style>
 

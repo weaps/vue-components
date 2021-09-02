@@ -9,8 +9,10 @@
 <template>
 	<div class="home">
 		<img alt="Vue logo" src="../assets/logo.png" />
+		<ul class="tab" v-tab={}>
+			<li v-for="item of tab.tabList" :key="item" v-text="item" :class="{active: item === tab.currentIndex}" :title="tab.currentIndex" @click="tab.currentIndex = item"></li>
+		</ul>
 		<h1>{{$store.state.num}}</h1>
-		<svgs icon="qq" size="2rem" color="red" />
 		<el-button type="primary" @click="clickme">点我</el-button>
 		<custom-form
 			:model="formData"
@@ -32,7 +34,12 @@
 		<div>{{ formData }}</div>
 		<HelloWorld msg="Welcome to Your Vue.js App" />
 		<date-picker v-model="nowDate"></date-picker>
-		<div style="height: 1000px"></div>
+		<div class="swiper">
+			<ul>
+				<li v-for="item of 5" :key="item">{{item}}asdfasdfasdfsd</li>
+			</ul>
+		</div>
+		<el-button type="primary">test</el-button>
 	</div>
 </template>
 <script>
@@ -42,6 +49,8 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import datePicker from '@/components/datepicker/datepicker'
 import customItem from '@/components/custom-form/form-item'
 import customInput from '@/components/custom-form/input'
+import tab from '@/directives/tab.js'
+import Swiper from '@/utils/swiper'
 export default {
 	name: 'home',
 	data() {
@@ -79,6 +88,11 @@ export default {
 					},
 				],
 			},
+			tab: {
+				currentIndex: 'tab1',
+				tabList: ['tab1','tab2','tab3','tab4','tab5']
+			},
+			swiper: null
 		}
 	},
 	computed: {
@@ -87,7 +101,7 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.$xxx)
+		this.swiper = new Swiper('.swiper')
 	},
 	methods: {
 		async clickme() {
@@ -95,6 +109,9 @@ export default {
 			const res = await this.$store.dispatch('setNum')
 			if(res) this.$store.commit('setNum', res)
 		},
+	},
+	directives: {
+		tab
 	},
 	components: {
 		HelloWorld,

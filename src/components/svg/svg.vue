@@ -25,6 +25,9 @@ export default {
       default: () => '2rem'
     }
   },
+  mounted() {
+    console.log(this.icon)
+  },
   methods: {
     svgEvent() {
       this.$emit('svgEvent', this.icon)

@@ -74,6 +74,13 @@ ul,li
             cursor: not-allowed
 
 .drag-container
+  .text-right
+    text-align: right
+  .text-left
+    text-align: left
+  .el-dialog__header
+    text-align: left
+    border-bottom: 1px solid rgba(0, 0, 0, .06)
   .el-header
     position: relative
     background:rgba(255,255,255,1)
@@ -149,6 +156,14 @@ ul,li
           line-height: 30px 
   .list-group
     min-height: 100%
+    .sortable-chosen
+      display: inline-block
+      width: 100%
+      & > .el-button
+        width: 100%
+        height: 88px
+        background: transparent
+        text-align: center
   .el-card
     position: relative
     border-radius: 6px
@@ -157,21 +172,57 @@ ul,li
     overflow: visible
     &:last-child
       margin-bottom: 0
-    &.sortable-ghost
-      border: 1px dashed red
     .is-show
       display: none
     &:hover
       .is-show
         display: block
+    .el-card__header
+      text-align: left
+      .clearfix
+        & > span
+          position: relative
+          display: inline-block
+          line-height: 18px
+          padding-left: 12px
+          color: #262626
+          font-weight: bold
+          // border-left: 4px solid #368FFF
+          &::after
+            position: absolute
+            left: 0
+            top: 0
+            content: ''
+            width: 6px
+            height: 18px
+            background: #368FFF
   .container-scroll
     height: calc( 100vh - 48px )
     .drag-scroll-container
       height: calc(100vh - 96px)
       padding: 16px 16px 0 16px
   .drag-nav
+    position: relative
     height: 48px
+    padding: 0 20px
     background: rgba(255, 255, 255, 1)
+    .custom-dropdown
+      margin-top: 10px
+      height: 28px
+      .el-dropdown-link
+        vertical-align: top
+        line-height: 28px
+        display: inline-block
+        padding-left: 10px
+    &:after
+      position: absolute
+      left: 0
+      top: 0
+      content: ''
+      width: 100%
+      height: 48px
+      background: rgba(255, 255, 255, .5)
+      z-index: 10
   .right-drag-module
     position: relative
     float: left
@@ -245,3 +296,13 @@ ul,li
           height: 2px
           background: #368FFF
           z-index: 10
+  .tab-edit-dialog
+    .el-dialog__body
+      padding: 0
+      .table-box
+        padding: 0 20px
+  .el-table__header-wrapper
+    th
+      background: rgba(0,0,0, .02)
+      color: rgba(0,0,0, .85)
+
